@@ -11,11 +11,12 @@
 
 </head>
 <body>
+    <body>
 
     <header class="quiz-header">
         <div class="container">
-            <h1>Arduino Uno Kviz</h1>
-            <p>Testiraj svoje znanje o najpopularnijoj mikrokontrolerskoj ploči na svijetu</p>
+            <h1>Arduino Uno Quiz</h1>
+            <p>Testiraj svoje znanje o najpoznatijoj mikrokontrolerskoj ploči</p>
         </div>
     </header>
 
@@ -24,33 +25,13 @@
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-md-9 col-sm-11">
 
-                    <div class="quiz-card text-center">
-                        <div class="question-number">1</div>
-                        <h4 class="mb-4 fw-bold">Koje je radno napajanje Arduino Uno ploče?</h4>
-
-                        <div class="text-start">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q1" id="opt1" value="3.3V">
-                                <label class="form-check-label" for="opt1">3.3 V</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q1" id="opt2" value="5V">
-                                <label class="form-check-label" for="opt2">5 V</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q1" id="opt3" value="12V">
-                                <label class="form-check-label" for="opt3">12 V</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q1" id="opt4" value="9V">
-                                <label class="form-check-label" for="opt4">9 V</label>
-                            </div>
-                        </div>
-
-                        <button id="nextBtn" class="btn btn-primary mt-4 w-100" disabled>
-                            Sljedeće pitanje →
-                        </button>
+                    <div class="quiz-card text-center" id="quizCard">
+                        <!-- Pitanja se ubacuju ovdje -->
                     </div>
+
+                    <button id="nextBtn" class="btn btn-primary mt-4 w-100" disabled>
+                        Sljedeće pitanje
+                    </button>
 
                     <div class="progress mt-4">
                         <div class="progress-bar" role="progressbar" style="width: 0%;"></div>
