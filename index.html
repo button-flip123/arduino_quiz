@@ -12,33 +12,37 @@
 
 </head>
 <body>
+
     <header class="quiz-header">
         <div class="container">
             <h1>Arduino Uno Quiz</h1>
+            <div id="timer">10:00</div>
             <p>Testiraj svoje znanje o najpoznatijoj mikrokontrolerskoj ploči</p>
         </div>
     </header>
 
-    <section id="quiz-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7 col-md-9 col-sm-11">
+    <div id="startScreen" class="quiz-card">
+        <h4 class="mt-4">Provjeri svoje znanje desetominutnim kvizom</h4>
+        <p class="lead mb-5">Imaš tačno <strong>10 minuta</strong> da odgovoriš na što više pitanja!</p>
+        <button id="startBtn" class="btn btn-primary text-white">Započni kviz!</button>
+        <p class="mt-4 text-muted">Kada klikneš – tajmer kreće odmah!</p>
+    </div>
 
-                    <div class="quiz-card text-center" id="quizCard">
-
-                    </div>
-
-                    <button id="nextBtn" class="btn btn-primary mt-4 w-100" disabled>
-                        Sljedeće pitanje
-                    </button>
-
-                    <div class="progress mt-4">
-                        <div class="progress-bar" role="progressbar" style="width: 0%;"></div>
+    <div id="quizContainer" class="hidden">
+        <section id="quiz-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 col-md-9 col-sm-11">
+                        <div class="quiz-card text-center" id="quizCard"></div>
+                        <button id="nextBtn" class="btn btn-primary mt-4 w-100" disabled>Sljedeće pitanje</button>
+                        <div class="progress mt-4">
+                            <div class="progress-bar" role="progressbar" style="width: 0%;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <footer>
         <p>Radio: Jasmin Poprženović</p>

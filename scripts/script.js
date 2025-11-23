@@ -57,7 +57,6 @@ let zvukOmogucen = false;
 document.body.addEventListener('click', function omoguciZvuk() {
     if (!zvukOmogucen) {
         zvukOmogucen = true;
-        pustiZvuk('zvukSljedece'); // mali test zvuk
         document.body.removeEventListener('click', omoguciZvuk);
     }
 }, { once: true });
@@ -82,31 +81,57 @@ const svaPitanja = [
 
 let trenutnoPitanje = 0;
 let bodovi = 0;
+let timerInterval;
+let preostaloSekundi = 10 * 60; // 10 minuta
 
+const startScreen = document.getElementById('startScreen');
+const quizContainer = document.getElementById('quizContainer');
 const quizCard = document.getElementById('quizCard');
 const nextBtn = document.getElementById('nextBtn');
 const progressBar = document.querySelector('.progress-bar');
+const timerDisplay = document.getElementById('timer');
+
+function pokreniTimer() {
+    timerInterval = setInterval(() => {
+        preostaloSekundi--;
+        const min = Math.floor(preostaloSekundi / 60).toString().padStart(2, '0');
+        const sec = (preostaloSekundi % 60).toString().padStart(2, '0');
+        timerDisplay.textContent = `${min}:${sec}`;
+
+        if (preostaloSekundi <= 0) {
+            clearInterval(timerInterval);
+            zavrsiKviz();
+        }
+    }, 1000);
+}
+
+function zavrsiKviz() {
+    clearInterval(timerInterval);
+    pustiZvuk('nextQuestion');
+    document.querySelector('#quiz-section .container').innerHTML = `
+        <div class="text-center py-5">
+            <h2 class="text-danger">Vrijeme je isteklo!</h2>
+            <h3>Osvojili ste ${bodovi} od ${svaPitanja.reduce((s,p) => s + p.poeni, 0)} bodova</h3>
+            <p>To je ${Math.round((bodovi / svaPitanja.reduce((s,p) => s + p.poeni, 0)) * 100)}% tačnosti!</p>
+            <button class="btn btn-success btn-lg mt-4" onclick="location.reload()">Igraj ponovo</button>
+        </div>`;
+}
 
 function prikaziPitanje() {
     const p = svaPitanja[trenutnoPitanje];
     quizCard.innerHTML = p.generisiHTML();
-
-    const procenat = ((trenutnoPitanje + 1) / svaPitanja.length) * 100;
-    progressBar.style.width = procenat + '%';
-
+    progressBar.style.width = ((trenutnoPitanje + 1) / svaPitanja.length) * 100 + '%';
     nextBtn.disabled = true;
 
-    if (p.tip === "radio") {
-        document.querySelectorAll('input[type="radio"]').forEach(radio => {
-        radio.addEventListener('change', () => nextBtn.disabled = false);
+    if(p.tip === "radio") {
+        document.querySelectorAll('input[type="radio"]').forEach(r => {
+            r.addEventListener('change', () => nextBtn.disabled = false);
         });
     } 
-    else {
+    else{
         const input = document.getElementById(`textAnswer${p.id}`);
         input.focus();
-        input.addEventListener('input', () => {
-            nextBtn.disabled = input.value.trim() === '';
-        });
+        input.addEventListener('input', () => nextBtn.disabled = input.value.trim() === '');
     }
 }
 
@@ -116,38 +141,35 @@ nextBtn.addEventListener('click', () => {
 
     if (p.tip === "radio") {
         const izabrano = document.querySelector(`input[name="q${p.id}"]:checked`);
-        if (izabrano && p.tacniOdgovovori.includes(izabrano.value)) {
+        if (izabrano && p.tacniOdgovovori.includes(izabrano.value))     
             tacno = true;
-        }
-    } else {
+    } 
+    else {
         const input = document.getElementById(`textAnswer${p.id}`);
         if (p.jeTacan(input.value)) {
             input.classList.add('correct');
             tacno = true;
-        } else {
+        } 
+        else{ 
             input.classList.add('incorrect');
         }
     }
-
-    if (tacno) bodovi += p.poeni;
-
-    // ZVUK KAD PRELAZI NA SLEDEĆE PITANJE
-    if (zvukOmogucen){ 
-        pustiZvuk('nextQuestion');
-    }
+        
+    if (tacno){ bodovi += p.poeni; }
+    pustiZvuk('nextQuestion');
 
     trenutnoPitanje++;
     if (trenutnoPitanje < svaPitanja.length) {
         prikaziPitanje();
     } 
     else {
-        document.querySelector('#quiz-section .container').innerHTML = `
-            <div class="text-center py-5">
-                <h2 class="text-success">Čestitamo!</h2>
-                <h3>Osvojili ste ${bodovi} od ${svaPitanja.reduce((s,p) => s + p.poeni, 0)} bodova</h3>
-                <button class="btn btn-success btn-lg mt-4" onclick="location.reload()">Igraj ponovo</button>
-            </div>`;
+        zavrsiKviz();
     }
 });
 
-prikaziPitanje();
+document.getElementById('startBtn').addEventListener('click', () => {
+    startScreen.classList.add('hidden');
+    quizContainer.classList.remove('hidden');
+    pokreniTimer();
+    prikaziPitanje();
+});
