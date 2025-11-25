@@ -14,18 +14,34 @@
 <body>
 
     <header class="quiz-header">
-        <div class="container">
-            <h1>Arduino Uno Quiz</h1>
+        <div class="container text-center">
+            <div id="arduinoLogoContainer" class="mb-4">
+                <img src="assets/images/arduino-logo.png" 
+                    alt="Arduino Logo" 
+                    id="arduinoLogo"
+                    class="img-fluid">
+            </div>
+            <h1 class="display-4 fw-bold">Arduino Uno Kviz</h1>
+            <p class="lead mb-2">Testiraj svoje znanje o najpopularnijoj mikrokontrolerskoj ploči</p>
             <div id="timer">10:00</div>
-            <p>Testiraj svoje znanje o najpoznatijoj mikrokontrolerskoj ploči</p>
         </div>
     </header>
 
-    <div id="startScreen" class="quiz-card">
-        <h4 class="mt-4">Provjeri svoje znanje desetominutnim kvizom</h4>
-        <p class="lead mb-5">Imaš tačno <strong>10 minuta</strong> da odgovoriš na što više pitanja!</p>
-        <button id="startBtn" class="btn btn-primary text-white">Započni kviz!</button>
-        <p class="mt-4 text-muted">Kada klikneš – tajmer kreće odmah!</p>
+    <div id="startScreen" class="d-flex align-items-center justify-content-center min-vh-100 py-5">
+        <div class="quiz-card p-5 shadow-lg text-center" style="max-width: 600px; width: 100%;">
+            <img src="assets/images/arduino-logo.png" alt="Arduino" class="mb-4" style="height: 90px;">
+
+            <h2 class="mb-4 fw-bold text-primary">Dobrodošao na 10-minutni izazov!</h2>
+            <p class="lead mb-4">
+                Imaš tačno <strong class="text-success">10 minuta</strong> da odgovoriš na što više pitanja!
+            </p>
+            <button id="startBtn" class="btn btn-success btn-lg px-5 py-3 fw-bold shadow">
+                <span class="me-2">Započni kviz</span>
+            </button>
+            <p class="mt-4 text-muted small">
+                Kada klikneš – tajmer kreće odmah. Sretno!
+            </p>
+        </div>
     </div>
 
     <div id="quizContainer" class="hidden">

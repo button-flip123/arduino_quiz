@@ -43,16 +43,15 @@ class Pitanje {
     }
 }
 
-// Funkcije za puštanje zvuka
 function pustiZvuk(id) {
     const audio = document.getElementById(id);
     if (audio) {
-        audio.currentTime = 0;  // resetuje na početak
-        audio.play().catch(() => {}); // Chrome blokira autoplay ako nema interakcije, ali poslije prvog klika radi
+        audio.currentTime = 0;  
+        audio.play().catch(() => {}); 
     }
 }
 
-// Omogući autoplay poslije prvog korisničkog klika (Chrome politika)
+
 let zvukOmogucen = false;
 document.body.addEventListener('click', function omoguciZvuk() {
     if (!zvukOmogucen) {
@@ -168,8 +167,9 @@ nextBtn.addEventListener('click', () => {
 });
 
 document.getElementById('startBtn').addEventListener('click', () => {
-    startScreen.classList.add('hidden');
-    quizContainer.classList.remove('hidden');
+    document.getElementById('startScreen').remove();
+    document.getElementById('quizContainer').classList.remove('hidden');
     pokreniTimer();
     prikaziPitanje();
+    pustiZvuk('nextQuestion');
 });
