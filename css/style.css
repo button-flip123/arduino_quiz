@@ -1,3 +1,4 @@
+/* CSS ažuriran - poboljšana vidljivost radio buttona */
 :root {
     --arduino-green: #00979D;
     --arduino-dark: #2A3B47;
@@ -38,7 +39,6 @@ body {
     margin-top: 10px;
 }
 
-
 #timer {
     position: absolute;
     top: 15px;
@@ -51,7 +51,6 @@ body {
     font-family: 'Roboto Mono', monospace;
 }
 
-  
 #startScreen {
     display: flex;
     align-items: center;
@@ -82,7 +81,6 @@ body {
     box-shadow: 0 15px 35px rgba(0, 151, 157, 0.5);
 }
 
-  
 #quiz-section {
     padding: 50px 0;
 }
@@ -116,7 +114,6 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-
 .form-check {
     padding: 14px 18px;
     margin: 12px 0;
@@ -124,6 +121,7 @@ body {
     border: 2px solid #e2e8f0;
     background-color: #f8ffff;
     transition: all 0.3s ease;
+    cursor: pointer; /* Dodato za bolji UX */
 }
 
 .form-check:hover {
@@ -132,14 +130,22 @@ body {
     transform: translateX(5px);
 }
 
+.form-check-input {
+    width: 1.5em; /* Povećana veličina radio buttona */
+    height: 1.5em;
+    margin-right: 10px;
+    border: 2px solid #333; /* Tamniji border za bolju vidljivost */
+    background-color: white;
+}
+
 .form-check-input:checked {
     background-color: var(--arduino-green);
     border-color: var(--arduino-green);
 }
 
-.form-check-input:checked + .form-check-label {
-    color: var(--arduino-green);
-    font-weight: 600;
+.form-check-label {
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 
 .input-answer {
@@ -170,7 +176,6 @@ body {
     color: #721c24;
 }
 
-   
 #nextBtn {
     background: var(--arduino-green);
     border: none;
@@ -198,7 +203,6 @@ body {
     box-shadow: none;
 }
 
-  
 .progress {
     height: 10px;
     background: #ddd;
@@ -212,7 +216,6 @@ body {
     transition: width 0.6s ease;
 }
 
-  
 footer {
     background: var(--arduino-dark);
     color: white;
@@ -222,7 +225,6 @@ footer {
     margin-top: auto;
 }
 
- 
 .hidden {
     display: none !important;
 }
@@ -230,7 +232,6 @@ footer {
 .text-success { color: var(--correct) !important; }
 .text-danger { color: var(--wrong) !important; }
 
-  
 #arduinoLogoContainer {
     margin: 20px 0 10px;
 }
